@@ -17,6 +17,7 @@ export default function getArticles(topic: any, page: number) {
         setLoading(false);
       } catch (error: any) {
         setError(error.message);
+        
       }
     };
     fetchData();
