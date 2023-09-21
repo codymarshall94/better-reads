@@ -12,6 +12,8 @@ export default function Article({ topic }: ArticleProps) {
   const [currentResults, setCurrentResults] = useState<number>(1);
   const { data: articles, loading, error } = getArticles(topic, currentResults);
 
+  console.log(articles);
+
   const handleNextArticle = () => {
     if (currentArticle === articles.length - 1) {
       return;
@@ -21,14 +23,14 @@ export default function Article({ topic }: ArticleProps) {
 
   if (loading) return <div className="text-6xl">Loading...</div>;
 
-  if (articles && articles.articles.length > 0) {
-    const article = articles.articles[currentArticle];
+  if (articles && articles.results.length > 0) {
+    const article = articles.results[currentArticle];
 
     return (
       <div className="flex flex-col items-start max-w-screen-lg">
         <div className="flex flex-row justify-between items-baseline w-48">
-          <h3 className="text-2xl">{article?.author || "No Author"}</h3>
-          <h5>{new Date(article.publishedAt).toLocaleDateString()}</h5>
+          <h3 className="text-2xl">{article?.creator || "No Author"}</h3>
+          <h5>{new Date(article.pubDate).toLocaleDateString()}</h5>
         </div>
         <div className="flex flex-col">
           <h1 className="text-4xl md:text-6xl">{article.title}</h1>
@@ -36,7 +38,7 @@ export default function Article({ topic }: ArticleProps) {
           <h4 className="text-2xl">{article.description}</h4>
         </div>
         <a
-          href={article.url}
+          href={article.link}
           target="_blank"
           className="bg-[#9015D5] p-4 text-xl mt-2"
         >

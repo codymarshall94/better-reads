@@ -11,7 +11,7 @@ export default function getArticles(topic: any, page: number) {
       setLoading(true);
       try {
         const { data: response } = await axios.get(
-          `https://newsapi.org/v2/top-headlines?language=en&category=${topic}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
+          `https://newsdata.io/api/1/news?category=${topic}&language=en&apikey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
         );
         setData(response);
         setLoading(false);
